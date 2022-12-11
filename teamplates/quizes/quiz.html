@@ -1,0 +1,142 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'quizes/img/favicon.ico' %}">
+    <link rel="stylesheet" href={% static 'style.css' %}>
+    <link rel="stylesheet" href="{% static 'quizes/css/css.css' %}">
+    <script src="{% static 'quizes/quiz.js' %}" defer></script> 
+    <title>UStudy - платформа для тестирования</title>
+  </head>
+  <body>
+    <style>
+      .quiz-btns {
+    display: flex;
+    justify-content: end;
+}
+    </style>
+    <div class="sticky-timer" id="sticky-timer">
+      <div align="right " id="displaytimer"></div>
+    </div>
+    
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col">
+          <p style="font-size: 18px"><b>Ф.И.О:</b> {{ request.user.get_full_name }}</p>
+          <p style="font-size: 18px"><b>Предмет:</b> {{quiz.subject_title}}</p>
+          <p style="font-size: 18px"><b>Проходной балл:</b> {{quiz.required_score_to_pass}}</p>
+          <a href="{% url 'mainpage' %}" class="btn btn-danger">Выйти с теста</a>
+        </div>
+        
+      
+    </div>
+
+    <div class="container ">
+       <form method='post' action=''>
+          {% csrf_token %}
+          {% for q in questions %}
+          <div class="form-group">
+            <h5 for="question">{% autoescape off %}{{q.question}}{% endautoescape %} </h5>
+            <!-- <img src="{% static 'public/uploaded/ouGHMaZQv1PJeK8tOe2U4362pleXQJIGAiYfs2et.png'%}" alt=""> -->
+          </div>
+
+          {% if q.image_path %}
+            <img src="{% static q.image_path %}" width="300px">
+          {% endif %}
+
+          <div class="form-check">
+              <div class="form-check form-check-inner">
+                  <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="[1]">
+                  <label class="form-check-label" for="gridRadios1">
+                    {% autoescape off %}{{q.var1}}{% endautoescape %}
+                  </label>
+                 
+              </div>
+              <div class="form-check form-check-inner">
+                  <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="[2]">
+                  <label class="form-check-label" for="gridRadios2">
+                    {% autoescape off %}{{q.var2}}{% endautoescape %}
+                  </label>
+              </div>
+              <div class="form-check form-check-inner">
+                  <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios3" value="[3]">
+                  <label class="form-check-label" for="gridRadios3">
+                    {% autoescape off %}{{q.var3}}{% endautoescape %}
+                  </label>
+              </div>
+              <div class="form-check form-check-inner">
+                  <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios4" value="[4]">
+                  <label class="form-check-label" for="gridRadios4">
+                    {% autoescape off %}{{q.var4}}{% endautoescape %}
+                  </label>
+              </div>
+              <div class="form-check form-check-inner">
+                  <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios5" value="[5]">
+                  <label class="form-check-label" for="gridRadios5">
+                    {% autoescape off %}{{q.var5}}{% endautoescape %}
+                  </label>
+              </div>
+              <br>
+          </div>    
+          {% endfor %}
+        <input id='timer' type='hidden' name="timer" value="">
+          <br>
+          <div style="display: flex; justify-content: end; margin-bottom: 20px">
+            <button type="submit" class="btn btn-primary">Завершить</button>
+          </div>
+          <div class="ppoo" id="ppoo">
+            <div class="overlay">
+              <div class="modalbek">
+                <p class="modalbek-title">Время вышло</p>
+                
+                <div class="modalbek-btn d-flex justify-between">
+                  
+                  <div style="display: flex; justify-content: end; margin-bottom: 20px">
+                    <button type="submit" class="btn btn-primary">Завершить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <script>
+       
+          console.log('hello world')
+          const timer=document.getElementById('displaytimer')
+          console.log(timer.textContent)
+          const inputtag = document.getElementById('timer')
+          p=44
+          t=60
+          setInterval(()=>{
+              t-=1
+              if (t == 0) {
+                t = 60
+                p-=1
+              }
+              if(p == 0 ) {
+                document.getElementById("ppoo").style.display = "block";
+                document.getElementById("sticky-timer").style.display = "none";
+              }
+              
+              timer.innerHTML ="<b>Время: " +p+ " минут " +t+" секунд</b>"
+              p_res = 44 - p
+              t_res = 61 - t
+              inputtag.value = "" +p_res+ " минут " +t_res+" секунд"
+          },1000)
+      </script>
+       
+      </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    
+</body>
+</body>
+</html>

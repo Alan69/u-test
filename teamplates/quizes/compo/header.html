@@ -1,0 +1,79 @@
+{% load static %}
+<header class="header-area header-sticky wow slideInDown">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <div class="row">
+              <div class="col-2">
+                <a class="logo" href="{% url 'mainpage' %}">
+                  <img
+                    src="{% static 'quizes/img/Group.png' %}"
+                    alt=""
+                    style="width: 150px; height: 50px"
+                  />
+                </a>
+              </div>
+              <div class="col-10">
+                <ul class="nav">
+                  {% if request.user.is_staff %}
+                  <li>
+                    <div class="gradient-button">
+                      <a
+                        class="asd"
+                        href="{% url 'request_page' %}"
+                        style="line-height: 20px"
+                        >Отправить заявку</a
+                      >
+                    </div>
+                  </li>
+                  {% endif %} 
+                  {% if request.user.is_staff %}
+                  <li>
+                    <div class="gradient-button">
+                      <a href="{% url 'addstudent' %}" style="line-height: 20px"
+                        >Добавить пользователя</a
+                      >
+                    </div>
+                  </li>
+                  {% endif %}
+                  <li>
+                    <div class="dropdown ">
+                      <button
+                        class="gradient-buttons dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        {{ request.user.get_full_name }}
+                    </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        {% if request.user.is_superuser %}
+                        <li>
+                          <a class="dropdown-item" href="{% url 'individual' %}"
+                            >данные</a
+                          >
+                        </li>
+                        {% endif %}
+                        <li>
+                          <a class="dropdown-item" href="{% url 'logoutPage' %}"
+                            >Выйти</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+                <a class='menu-trigger'>
+                  <span>Menu</span>
+              </a>
+              </div>
+            </div>
+            
+            
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>

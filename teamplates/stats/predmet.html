@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uapp</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"
+  ></script>
+  <link rel="stylesheet" href="{% static 'quizes/css/css.css' %}">
+  </head>
+    <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <!-- <li class="nav-item navs-bor">
+                <a class="nav-link active" aria-current="page" href="{% url 'mainpage' %}">Главная страница</a>
+              </li> -->
+            </ul>
+            <form class="d-flex">
+              <div class="dropdown">
+                <button
+                  class="btn btn-primary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false">   
+                  {{ request.user.get_full_name }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Баланс: 1000 тг</a></li>
+                  <li><a class="dropdown-item" href="#">Редактировать</a></li>
+                  {% if request.user.is_superuser %}
+                  <li><a class="dropdown-item" href="{% url 'superadmin' %}">данные</a></li>
+                  {% endif %}
+                  <li><a class="dropdown-item" href="{% url 'logoutPage' %}">Выйти</a></li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; position: fixed; height: 100vh; top: 0">
+        <a class="navbar-brand" href="{% url 'mainpage' %}">
+            <img src="{% static 'quizes/img/Group.png' %}" alt=""
+          /></a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="{% url 'superadmin' %}" class="nav-link text-white" aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+              Пользователи
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'results_page' %}" class="nav-link text-white">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+              Результаты
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'predmet_page' %}" class="nav-link active">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+              Предметы
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'regions_stat' %}" class="nav-link text-white">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#table2"/></svg>
+              Регионы
+            </a>
+          </li>
+        </ul>
+        <hr>
+        
+      </div>
+        
+
+        
+
+        <div class="container result-tables_block mb-100">
+          <h2>Предметы</h2>
+          
+          <table class="table ">
+            <thead>
+              <tr class="table-header">
+                <th scope="col">Предмет</th>
+                <th scope="col">Тема</th>
+                <th scope="col">Класс</th>
+                <th scope="col">Кол_вопросов</th>
+                <th scope="col">Время</th>
+                <th scope="col">Балы_для прохождения</th>
+                <th scope="col">Сложность</th>
+              </tr>
+            </thead>
+            {% for q in quiz %}
+            <tbody>
+              <tr class="tr-one">
+                <th scope="row">{{q.name}}</th>
+                          <td>{{q.topic}}</td>
+                          <td>{{q.grade}}</td>
+                          <td>{{q.number_of_questions}}</td>
+                          <td>{{q.time}}</td>
+                          <td>{{q.required_score_to_pass}}</td>
+                          <td>{{q.difficluty}}</td>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+          <div class="exit-btn">
+            <a href="{% url 'mainpage' %}"><button class="btn btn-primary" type="button">
+                Вернутся на главную страницу
+              </button></a>
+          </div>
+        </div>
+        
+    </body>
+    <style>
+        .result-tables_block {
+          margin-left: 18%;
+          width: 75%;
+        }
+        .exit-btn {
+        display: flex;
+        justify-content: end;
+    }
+      </style>
+</html>

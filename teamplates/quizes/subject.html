@@ -1,0 +1,160 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'quizes/img/favicon.ico' %}">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href={% static 'style.css' %}>
+    <link rel="stylesheet" href="{% static 'quizes/css/css.css' %}" />
+    <link rel="stylesheet" href="{% static 'quizes/css/templeto.css' %}">
+    <link rel="stylesheet" href="{% static 'quizes/css/animated.css' %}">
+    <script src="{%static 'quizes/js/animation.js'%}"></script>
+    <script src="{%static 'quizes/js/custom.js'%}"></script>
+ <script src="{% static 'quizes/main.js' %}" defer></script> 
+    <title>UStudy - платформа для тестирования</title>
+  </head>
+  <body>
+    <div>
+<!-- Modal -->
+<div class="modal fade" id="quizStartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body-confirm"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+        <button type="button" id="start-button" class="btn btn-success">Да</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<header class="header-area header-sticky wow slideInDown">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <div class="row">
+            <div class="col-2">
+              <a class="logo" href="{% url 'mainpage' %}">
+                <img
+                  src="{% static 'quizes/img/Group.png' %}"
+                  alt=""
+                  style="width: 150px; height: 50px"
+                />
+              </a>
+            </div>
+            <div class="col-10">
+              <ul class="nav">
+                <li class="scroll-to-section"><a href="{% url 'mainpage' %}" class="active">Главная</a></li>
+                {% if request.user.is_staff %}
+                <li>
+                  <div class="gradient-button">
+                    <a
+                      class="asd"
+                      href="{% url 'request_page' %}"
+                      style="line-height: 20px"
+                      >Отправить заявку</a
+                    >
+                  </div>
+                </li>
+                {% endif %} 
+                {% if request.user.is_superuser %}
+                <li>
+                  <div class="gradient-button">
+                    <a href="{% url 'addstudent' %}" style="line-height: 20px"
+                      >Добавить пользователя</a
+                    >
+                  </div>
+                </li>
+                {% endif %}
+                <li>
+                  <div class="gradient-button">
+                    <a href="{% url 'logoutPage' %}"
+                      ><i class="fa fa-sign-in-alt"></i>Выйти</a
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="services">
+<div class="container">
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+            <div
+              class="section-heading wow fadeInDown"
+              data-wow-duration="1s"
+              data-wow-delay="0.5s"
+            >
+              <h4>Выберите<em> Класс </em></h4>
+              <img
+                src="{% static 'quizes/img/heading-line-dec.png' %}"
+                alt=""
+              />
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <div class="row">
+    
+    {% for g in grade %}
+    <div class="col-lg-3 mt-50">
+        <div class="service-item first-service">
+          <div class="icon"></div>
+          <h4>{{ g.grade }} Класс</h4>
+          
+          <div class="text-button">
+            <a href="{% url 'main-view' g.id %}">Выбрать <i class="fa fa-arrow-right"></i></a>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+  </div>
+  </div>
+</div>
+</div>
+</div>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"
+  ></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</body>
+</html>

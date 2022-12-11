@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты тестирования</title>
+    <link rel="stylesheet" href="{% static 'quizes/css/css.css' %}">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+  <div class="resulit__inner-maina">
+    <div class="result-container">
+        <div class="row result__header" style="margin-bottom: 30px;">
+            <div class="col-6">
+                <h2 style="text-transform: uppercase;">Тестируемый Результат</h2>
+            </div>
+            <div class="col-6" style="text-align: end;">
+                <a href="{% url 'mainpage' %}"><img src="{% static 'quizes/img/Group.png' %}" alt=""></a>
+            </div>
+        </div>
+
+        <div class="result__info">
+            <div class="result__info-left">
+                <div class="result__info-left-text"><div><svg width="17" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z"/></svg></div><b>КАТО</b></div>
+                <div class="result__info-left-text"><div><svg xmlns="http://www.w3.org/2000/svg" width="22" viewBox="0 0 640 512"><path d="M337.8 5.4C327-1.8 313-1.8 302.2 5.4l-139 92.7L37.6 126C15.6 130.9 0 150.3 0 172.8V464c0 26.5 21.5 48 48 48H592c26.5 0 48-21.5 48-48V172.8c0-22.5-15.6-42-37.6-46.9L476.8 98.1 337.8 5.4zM256 416c0-35.3 28.7-64 64-64s64 28.7 64 64v96H256V416zM96 192h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V208c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H512c-8.8 0-16-7.2-16-16V208zM96 320h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V336c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H512c-8.8 0-16-7.2-16-16V336zM408 176c0 48.6-39.4 88-88 88s-88-39.4-88-88s39.4-88 88-88s88 39.4 88 88zm-88-48c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H336V144c0-8.8-7.2-16-16-16z"/></svg></div><b>Школа</b></div>
+                <div class="result__info-left-text"><div><svg xmlns="http://www.w3.org/2000/svg" width="22" viewBox="0 0 640 512"><path d="M320 32c-8.1 0-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6l57.9 20.9C57.3 229.3 48 259.8 48 291.9v28.1c0 28.4-10.8 57.7-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7C90.3 344.3 86 329.8 80 316.5V291.9c0-30.2 10.2-58.7 27.9-81.5c12.9-15.5 29.6-28 49.2-35.7l157-61.7c8.2-3.2 17.5 .8 20.7 9s-.8 17.5-9 20.7l-157 61.7c-12.4 4.9-23.3 12.4-32.2 21.6l159.6 57.6c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32zM128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6 354.5 314c-11.1 4-22.8 6-34.5 6s-23.5-2-34.5-6L143.3 262.6 128 408z"/></svg></div><b>Класс</b></div>
+                <div class="result__info-left-text"><div><svg xmlns="http://www.w3.org/2000/svg" width="17" viewBox="0 0 448 512"><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg></div><b>Ф.И.О</b></div>
+                <!-- <div class="result__info-left-text"><div><svg xmlns="http://www.w3.org/2000/svg" width="17" viewBox="0 0 448 512"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/></svg></div><b>Дата тестирования</b></div> -->
+                <!-- <div class="result__info-left-text"><div><svg xmlns="http://www.w3.org/2000/svg" width="17" viewBox="0 0 448 512"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/></svg></div><b>Дата формирования</b></div> -->
+            </div>
+            <div class="result__info-right">
+              <p class="result__info-left-text">{{region}}</p>
+              <p class="result__info-left-text">{{school}}</p>
+              <p class="result__info-left-text">{{class_name}}</p>
+              <p class="result__info-left-text">{{ request.user.get_full_name }}</p>
+                <!-- <p class="result__info-left-text">04.10.2018</p> -->
+                <!-- <p class="result__info-left-text">29.10.2018 22:22:46</p> -->
+            </div>
+        </div>
+        <h2>Ваши результаты</h2>
+        <!--<table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Предмет</th>
+                <th scope="col">Казахский язык</th>
+                <th scope="col">Математика</th>
+                <th scope="col">Химия</th>
+                <th scope="col">Физика</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Балл</th>
+                <td>13</td>
+                <td>5</td>
+                <td>15</td>
+                <td>8</td>
+              </tr>
+            </tbody>
+            <thead style="background-color: #D9EDF7;">
+                <tr>
+                  <th scope="col">Жалпы балл</th>
+                  <th scope="col"> </th>
+                  <th scope="col"> </th>
+                  <th scope="col"> </th>
+                  <th scope="col">41</th>
+                </tr>
+              </thead>-->
+          </table>
+          <table class="table" style="width: 100% !important">
+            <thead class="tables__headerr">
+              <tr>
+                <th scope="col">Предмет-раздел(класс)</th>
+                <th scope="col">Оценка</th>
+              </tr>
+            </thead>
+            {% if results %}
+            {% for result in results %}
+            <tbody>
+              <tr>
+                <td>{{ result.quiz }}</td>
+                <td>{{ result.score }}/100.0</td>
+              </tr>
+            </tbody>
+            {% endfor %}
+            {% else %}
+            <tbody>
+              <tr>
+                <td>Данные отсутвуют</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+            {% endif %}
+          </table>
+          <div class="exit-btn2" style="display: flex; justify-content:end; margin-top: 45px;">
+            <a href="{% url 'export_to_excel_btn' %}" style="margin-right: 20px;"><button class="btn btn-primary" type="button">
+              Скачать таблицу
+             </button></a> 
+            <a href="{% url 'mainpage' %}" style="margin-right: 20px;"><button class="btn btn-primary" type="button">
+              Выйти
+             </button></a>      
+          </div>
+    </div>
+    
+  </div>
+  
+</body>
+</html>

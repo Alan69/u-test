@@ -1,0 +1,11 @@
+[0;1;31m●[0m emperor.uwsgi.service - uwsgi emperor for uapp website
+     Loaded: loaded (/etc/systemd/system/emperor.uwsgi.service; enabled; vendor preset: enabled)
+     Active: [0;1;31mfailed[0m (Result: exit-code) since Mon 2022-09-19 20:20:36 UTC; 20s ago
+    Process: 203579 ExecStart=/root/uapp_quiz/uapp/uwsgi --emperor /root/uapp_quiz/uapp/vassals --uid www-data --gid www-data [0;1;31m(code=exited, status=203/EXEC)[0m
+   Main PID: 203579 (code=exited, status=203/EXEC)
+
+Sep 19 20:20:36 vm9027 systemd[1]: emperor.uwsgi.service: Scheduled restart job, restart counter is at 5.
+Sep 19 20:20:36 vm9027 systemd[1]: Stopped uwsgi emperor for uapp website.
+Sep 19 20:20:36 vm9027 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185memperor.uwsgi.service: Start request repeated too quickly.[0m
+Sep 19 20:20:36 vm9027 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185memperor.uwsgi.service: Failed with result 'exit-code'.[0m
+Sep 19 20:20:36 vm9027 systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start uwsgi emperor for uapp website.[0m
