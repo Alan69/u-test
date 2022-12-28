@@ -32,57 +32,58 @@
           <p style="font-size: 18px"><b>Проходной балл:</b> {{quiz.required_score_to_pass}}</p>
           <a href="{% url 'mainpage' %}" class="btn btn-danger">Выйти с теста</a>
         </div>
-        
-      
     </div>
 
-    <div class="container ">
+    <div class="container">
        <form method='post' action=''>
           {% csrf_token %}
           {% for q in questions %}
           <div class="form-group">
+            <h5 for="question">id: {{q.id}}</h5>
             <h5 for="question">{% autoescape off %}{{q.question}}{% endautoescape %} </h5>
-            <!-- <img src="{% static 'public/uploaded/ouGHMaZQv1PJeK8tOe2U4362pleXQJIGAiYfs2et.png'%}" alt=""> -->
+            <h5 for="question">answer: {{q.answers}}</h5>
           </div>
 
           {% if q.image_path %}
             <img src="{% static q.image_path %}" width="300px">
           {% endif %}
 
-          <div class="form-check">
-              <div class="form-check form-check-inner">
-                  <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="[1]">
-                  <label class="form-check-label" for="gridRadios1">
-                    {% autoescape off %}{{q.var1}}{% endautoescape %}
-                  </label>
-                 
-              </div>
-              <div class="form-check form-check-inner">
-                  <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="[2]">
-                  <label class="form-check-label" for="gridRadios2">
-                    {% autoescape off %}{{q.var2}}{% endautoescape %}
-                  </label>
-              </div>
-              <div class="form-check form-check-inner">
-                  <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios3" value="[3]">
-                  <label class="form-check-label" for="gridRadios3">
+          <div class="form-check myItems">
+            <div class="form-check form-check-inner">
+                <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1" value="[1]">
+                <label class="form-check-label" for="gridRadios1">
+                  {% autoescape off %}{{q.var1}}{% endautoescape %}
+                </label>
+            </div>
+
+            <div class="form-check form-check-inner">
+                <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2" value="[2]">
+                <label class="form-check-label" for="gridRadios2">
+                  {% autoescape off %}{{q.var2}}{% endautoescape %}
+                </label>
+            </div>
+
+            <div class="form-check form-check-inner">
+                <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios3" value="[3]">
+                <label class="form-check-label" for="gridRadios3">
                     {% autoescape off %}{{q.var3}}{% endautoescape %}
-                  </label>
-              </div>
-              <div class="form-check form-check-inner">
-                  <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios4" value="[4]">
-                  <label class="form-check-label" for="gridRadios4">
+                </label>
+            </div>
+
+            <div class="form-check form-check-inner">
+                <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios4" value="[4]">
+                <label class="form-check-label" for="gridRadios4">
                     {% autoescape off %}{{q.var4}}{% endautoescape %}
-                  </label>
-              </div>
-              <div class="form-check form-check-inner">
-                  <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios5" value="[5]">
-                  <label class="form-check-label" for="gridRadios5">
+                </label>
+            </div>
+
+            <div class="form-check form-check-inner">
+                <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios5" value="[5]">
+                <label class="form-check-label" for="gridRadios5">
                     {% autoescape off %}{{q.var5}}{% endautoescape %}
-                  </label>
-              </div>
-              <br>
-          </div>    
+                </label>
+            </div>
+          </div>  
           {% endfor %}
         <input id='timer' type='hidden' name="timer" value="">
           <br>
@@ -104,6 +105,7 @@
             </div>
           </div>
         </form>
+
         <script>
        
           console.log('hello world')

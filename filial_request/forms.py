@@ -23,3 +23,7 @@ class AddStudentForm(ModelForm):
     class Meta:
         model=AddStudent
         fields=['excel_file']
+
+        widgets = {
+        'excel_file': forms.FileInput(attrs={'class':'form-control'}),
+    }

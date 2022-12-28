@@ -29,6 +29,7 @@ DEBUG = True
 # ALLOWED_HOSTS = ['.u-test.kz', '127.0.0.1', 'localhost']
 ALLOWED_HOSTS = ['*']
 
+# AUTH_USER_MODEL = 'quizes.CustomUser'
 
 # Application definition
 
@@ -44,8 +45,7 @@ INSTALLED_APPS = [
     'results',
     'userprofile',
     'filial_request',
-    'import_export',
-    'login',
+    'import_export'
 ]
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
@@ -112,9 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'Asia/Almaty'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -124,13 +124,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-# SESSION_COOKIE_SECURE = True 
-# CSRF_COOKIE_SECURE = True
-# SECURE_SSL_REDIRECT = False 
+SESSION_COOKIE_SECURE = True 
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False 
 
-# SECURE_HSTS_SECONDS = 31536000 # 1 year
-# SECURE_HSTS_PRELOAD = True
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_SECONDS = 31536000 # 1 year
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 STATIC_URL = '/static/'
 # STATIC_ROOT = "/root/uapp_quiz/uapp/static/"

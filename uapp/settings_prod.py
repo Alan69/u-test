@@ -24,11 +24,9 @@ with open(os.path.join(BASE_DIR, 'uapp/secret_key.txt')) as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-# ALLOWED_HOSTS = ['.u-test.kz', '127.0.0.1', 'localhost']
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ['.u-test.kz', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -44,8 +42,7 @@ INSTALLED_APPS = [
     'results',
     'userprofile',
     'filial_request',
-    'import_export',
-    'login',
+    'import_export'
 ]
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
@@ -112,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Asia/Almaty'
 
@@ -124,20 +121,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-# SESSION_COOKIE_SECURE = True 
-# CSRF_COOKIE_SECURE = True
-# SECURE_SSL_REDIRECT = False 
+SESSION_COOKIE_SECURE = True 
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False 
 
-# SECURE_HSTS_SECONDS = 31536000 # 1 year
-# SECURE_HSTS_PRELOAD = True
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_SECONDS = 31536000 # 1 year
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = "/root/uapp_quiz/uapp/static/"
+STATIC_ROOT = "/root/uapp_quiz/uapp/static/"
 # STATIC_ROOT = BASE_DIR/ 'uapp/static'
-STATICFILES_DIRS=[
-    BASE_DIR/'static',
-]
+# STATICFILES_DIRS=[
+#     BASE_DIR/'uapp/static',
+# ]
 
 
 MEDIA_ROOT = BASE_DIR/ 'media' # media directory in the root directory
@@ -173,4 +170,4 @@ JAZZMIN_SETTINGS = {
     "changeform_format_overrides": {"auth.user": "vertical_tabs", "auth.group": "vertical_tabs"},
     
 }
-# CSRF_TRUSTED_ORIGINS = ['https://u-test.kz',]
+CSRF_TRUSTED_ORIGINS = ['https://u-test.kz',]

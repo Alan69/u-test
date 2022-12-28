@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
-from .models import RequestQuiz
-from .forms import RequestForm, AddStudentForm
+from django.shortcuts import render
+from .forms import RequestForm
 from django.http import HttpResponse
-from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.models import User
+from userprofile.models import Profile
+from openpyxl import load_workbook
 
 # Create your views here.
 def request_page(request):
@@ -13,20 +14,41 @@ def request_page(request):
         return HttpResponse("Запрос отправлен")
     else:
         form = RequestForm()
-        return render(request,'login/request.html', {'form':form})
+        return render(request,'filial/request.html', {'form':form})
 
 
 def add_students(request):
-    form = AddStudentForm()
-    if request.method=='POST' and request.FILES['document']:
-        # form = AddStudentForm(request.POST, request.FILES)
-        uploaded_file = request.FILES['document']
-        fs = FileSystemStorage()
-        fs.save(uploaded_file.name, uploaded_file)
+    if request.method == 'POST':
+        workbook = load_workbook(request.FILES['document'])
+        worksheet = workbook.active
+
+        student_region = request.user.profile.region
+        school_region = request.user.profile.school
+
+        for row in worksheet.iter_rows():
+            username = row[0].value
+            password = row[0].value
+            first_name = row[1].value
+            last_name = row[2].value
+            class_name = row[3].value
+
+            if User.objects.filter(username=username).exists():
+                continue
+
+            user = User.objects.create_user(
+                username=username,
+                password=password,
+                first_name=first_name,
+                last_name=last_name
+            )
+            user.save()
+
+            # if Profile.objects.filter(user=user).exists():
+            #     continue
+
+            # profile = Profile(user=user, class_name=class_name, region=student_region, school=school_region)
+            # profile.save()
+
         return HttpResponse("Ученики добавлены")
-        # if form.is_valid():
-        #     form.save()
-    # context={
-    #         'form':form,
-    #     }
-    return render(request,'quizes/addstudent.html')
+    else:
+        return render(request,'filial/addstudent.html')

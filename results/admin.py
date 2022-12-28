@@ -39,7 +39,7 @@ class ResultAdmin(ImportExportModelAdmin):
     # list_filter = [ResultFilter]
     resource_classes = [ResultResource, ResulNameResource]
     search_fields = ('region', 'school', 'class_name')
-    list_display = ('region', 'school', 'class_name', 'quiz', 'user_first_name', 'score')
+    list_display = ('region', 'school', 'class_name', 'quiz', 'user_first_name', 'score', 'created')
     
     def user_first_name(self, obj):
         return obj.user.first_name + " " +obj.user.last_name

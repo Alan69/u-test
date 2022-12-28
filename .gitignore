@@ -10,7 +10,9 @@ media
 .history
 /env
 .env 
-.venv 
+.venv
+migrations/
+/migrations 
 env/ 
 vassals
 .vassals
@@ -32,9 +34,6 @@ env.bak/
 venv.bak/
 /__pycache__
 __pycache__/
-migrations/
-/migrations
 *.log
 *.pot
 *.pyc
-
