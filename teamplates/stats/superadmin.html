@@ -66,7 +66,7 @@
                   <td>{{p.class_name}}</td>
                   
                   
-                  <td>{{p.user.get_full_name}}</td>
+                  <td>{{ p.user.first_name }} {{ p.user.last_name }}</td>
                   <td>{{p.user}}</td>
                   
                   <td>{{p.quiz}}</td>
@@ -77,90 +77,6 @@
               {% endfor %}
               </tbody>
             </table>
-
-            <!-- <nav aria-label="Page navigation example" id="pagination"> 
-              <ul class="pagination">
-                  {% for i in page_obj.paginator.page_range %}
-                  {% if page_obj.number == i %}
-                  <li class="page-item active"><a class="page-link" href="{{ request.path }}?page={{ i }}">{{i}}</a></li>
-
-                  {% else %}
-                  <li class="page-item"><a class="page-link" href="{{ request.path }}?page={{ i }}">{{i}}</a></li>
-                  {% endif %}
-                  {% endfor %}
-              </ul>
-            </nav> -->
-
-            <!-- <h3>2. Результатов учащихся по предмету</h3>
-            <div class="row">
-              <div class="col-9">
-                <div class="row "style="margin-top: 20px">
-                  <div class="col-3" style="font-size: 17px">
-                    <div style="display: flex; justify-content: space-between">
-                      <p>Математика</p> <span>75%</span>
-                    </div>
-                  </div>
-                  <div class="col-9">
-                    <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row "style="margin-top: 20px">
-                  <div class="col-3" style="font-size: 17px">
-                    <div style="display: flex; justify-content: space-between">
-                      <p>Руский язык</p> <span>25%</span>
-                    </div>
-                  </div>
-                  <div class="col-9">
-                    <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row "style="margin-top: 20px">
-                  <div class="col-3" style="font-size: 17px">
-                    <div style="display: flex; justify-content: space-between">
-                      <p>Биология</p> <span>62%</span>
-                    </div>
-                  </div>
-                  <div class="col-9">
-                    <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row "style="margin-top: 20px">
-                  <div class="col-3" style="font-size: 17px">
-                    <div style="display: flex; justify-content: space-between">
-                      <p>География</p> <span>40%</span>
-                    </div>
-                  </div>
-                  <div class="col-9">
-                    <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 43%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row "style="margin-top: 20px">
-                  <div class="col-3" style="font-size: 17px">
-                    <div style="display: flex; justify-content: space-between">
-                      <p>Химия</p> <span>95%</span>
-                    </div>
-                  </div>
-                  <div class="col-9">
-                    <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3" style="background-color: #DFF0D8;">
-                <p class="progres-tess">
-                  Нэтичность-один из главных показателей деятельности учителя. Она определяется на основе анализа письменных контрольных работ учителя в процессе выполнения учеником задания и по объему процентного соотношения. <b>90-100%</b> отлично, <b>80-89%</b> очень хорошо, <b>70-79%</b> хорошо, <b>55-69%</b> достаточно, <b>45-54%</b> удовлетворительно, <b>15-44%</b> неудовлетворительно, <b>0-14%</b>неудовлетворительно
-                </p>
-              </div>
-            </div> -->
             <div class="exit-btn2" style="display: flex; justify-content:end; margin-top: 45px;">
               <a href="{% url 'mainpage' %}" style="margin-right: 20px;"><button class="btn btn-primary" type="button">
                 Выйти

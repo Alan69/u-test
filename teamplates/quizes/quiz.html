@@ -27,7 +27,7 @@
     <div class="container mt-3">
       <div class="row">
         <div class="col">
-          <p style="font-size: 18px"><b>Ф.И.О:</b> {{ request.user.get_full_name }}</p>
+          <p style="font-size: 18px"><b>Ф.И.О:</b> {{ request.user.first_name }} {{ request.user.last_name }}</p>
           <p style="font-size: 18px"><b>Предмет:</b> {{quiz.subject_title}}</p>
           <p style="font-size: 18px"><b>Проходной балл:</b> {{quiz.required_score_to_pass}}</p>
           <a href="{% url 'mainpage' %}" class="btn btn-danger">Выйти с теста</a>
@@ -39,9 +39,9 @@
           {% csrf_token %}
           {% for q in questions %}
           <div class="form-group">
-            <h5 for="question">id: {{q.id}}</h5>
+            <!-- <h5 for="question">id: {{q.id}}</h5> -->
             <h5 for="question">{% autoescape off %}{{q.question}}{% endautoescape %} </h5>
-            <h5 for="question">answer: {{q.answers}}</h5>
+            <!-- <h5 for="question">answer: {{q.answers}}</h5> -->
           </div>
 
           {% if q.image_path %}

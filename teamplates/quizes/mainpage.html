@@ -71,7 +71,7 @@
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-          {% if request.user.is_staff and request.user.profile.is_teacher == False %}
+          {% if request.user.is_staff and request.user.is_teacher == False %}
           <a class="dropdown-item" href="{% url 'request_page' %}">Отправить заявку</a>
           {% endif %} 
           
