@@ -51,8 +51,8 @@ def mainpage(request):
 def subject(request):
     user_class_name = request.user.class_name
     user_class_name = ''.join(filter(str.isdigit, user_class_name))
-    # grade = Grade.objects.filter(grade = user_class_name)
-    grade = Grade.objects.all()
+    grade = Grade.objects.filter(grade = user_class_name)
+    # grade = Grade.objects.all()
     context = {'grade':grade}
     return render(request,'quizes/subject.html', context)
 
@@ -105,7 +105,7 @@ def quiz_view(request, id, pk):
         return render(request,'quizes/result.html', context)
     else:
         quiz = Quiz.objects.get(id=pk)
-        questions = sorted(Question.objects.filter(subject_id=quiz)[0:180], key=lambda x: random.random())
+        questions = sorted(Question.objects.filter(subject_id=quiz)[0:15], key=lambda x: random.random())
         # questions = Question.objects.filter(subject_id=pk)[0:15]
         context = {
             'questions': questions,

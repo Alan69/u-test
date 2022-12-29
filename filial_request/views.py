@@ -36,9 +36,15 @@ def add_students(request):
             if User.objects.filter(username=username).exists():
                 continue
 
+            user_class_name = username
+            user_class_name = ''.join(filter(str.isdigit, user_class_name))
+
+            user_class_password = password
+            user_class_password = ''.join(filter(str.isdigit, user_class_password))
+
             user = User.objects.create_user(
-                username=username,
-                password=password,
+                username=user_class_name,
+                password=user_class_password,
                 first_name=first_name,
                 last_name=last_name,
                 class_name = class_name,
