@@ -4,6 +4,10 @@ from .models import Quiz, Region, Question, Grade
 from import_export.admin import ImportExportModelAdmin
 from import_export import fields, resources, widgets
 
+class ForeignKeyWidget(widgets.ForeignKeyWidget):
+    def get_queryset(self, value, row):
+        # Custom queryset filtering based on the value
+        return self.model.objects.filter(name=value)
 
 class QuizResource(resources.ModelResource):
 
@@ -15,7 +19,7 @@ class QuizResource(resources.ModelResource):
 
     class Meta:
         model = Quiz
-        fields = ('id', 'lng_title', 'subject_title', 'grade', 'number_of_questions', 'simestr')
+        fields = ('id', 'lng_title', 'subject_title', 'grade', 'number_of_questions')
 
 class QuizAdmin(ImportExportModelAdmin):
     resource_class = QuizResource

@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from .forms import RequestForm
 from django.http import HttpResponse
-from django.contrib.auth.models import User
-from userprofile.models import Profile
+# from django.contrib.auth.models import User
+from userprofile.models import User
+# from userprofile.models import Profile
 from openpyxl import load_workbook
 
 # Create your views here.
@@ -22,8 +23,8 @@ def add_students(request):
         workbook = load_workbook(request.FILES['document'])
         worksheet = workbook.active
 
-        student_region = request.user.profile.region
-        school_region = request.user.profile.school
+        student_region = request.user.region
+        school_region = request.user.school
 
         for row in worksheet.iter_rows():
             username = row[0].value
@@ -39,7 +40,10 @@ def add_students(request):
                 username=username,
                 password=password,
                 first_name=first_name,
-                last_name=last_name
+                last_name=last_name,
+                class_name = class_name,
+                region=student_region,
+                school=school_region
             )
             user.save()
 

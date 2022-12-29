@@ -5,6 +5,7 @@ from .views import (
     mainpage,
     subject,
     remove_tags,
+    replace_img_path,
 )
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path('quiz/<int:id>/<pk>/', quiz_view, name='quiz-view'),
 
     path('remove_tags/<int:id>/', remove_tags, name='remove_tags'),
+    path('replace_img_path/<int:id>/', replace_img_path, name='replace_img_path'),
 ]

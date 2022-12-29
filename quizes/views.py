@@ -1,13 +1,14 @@
 from django.shortcuts import render
-from userprofile.models import Profile
+# from userprofile.models import Profile
 from .models import Quiz, Question, Grade
 from results.models import Result
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from userprofile.models import User
 import math
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 import random
-from .cleanTags import cleanhtml
+from .cleanTags import cleanhtml, removepath
 
 def remove_tags(request, id):
     obj = Question.objects.filter(subject_id = id)
@@ -32,6 +33,14 @@ def remove_tags(request, id):
         q.save(update_fields=["var5"])
     return HttpResponse("Успешно удалено")
 
+def replace_img_path(request, id):
+    obj = Question.objects.filter(subject_id = id)
+    for q in obj:
+        img = removepath(q.image_path)
+        q.image_path = img
+        q.save(update_fields=["image_path"])
+    return HttpResponse("Успешно изменино")
+
 @login_required(login_url='/login/')
 def mainpage(request):
     model=User.objects.all()
@@ -40,9 +49,11 @@ def mainpage(request):
     return render(request,'quizes/mainpage.html', context)
 
 def subject(request):
-    quiz = Quiz.objects.all()
+    user_class_name = request.user.class_name
+    user_class_name = ''.join(filter(str.isdigit, user_class_name))
+    # grade = Grade.objects.filter(grade = user_class_name)
     grade = Grade.objects.all()
-    context = {'quiz': quiz, 'grade':grade}
+    context = {'grade':grade}
     return render(request,'quizes/subject.html', context)
 
 def quiz(request, id):
@@ -76,7 +87,7 @@ def quiz_view(request, id, pk):
         percent = math.trunc(score)/(total*10) *100
 
         user = request.user
-        profile = Profile.objects.get(user=user)
+        # profile = Profile.objects.get(user=user)
         
         context = {
             'score':math.trunc(score),
@@ -85,16 +96,16 @@ def quiz_view(request, id, pk):
             'wrong':wrong,
             'percent':math.trunc(percent),
             'total':total,
-            'region':profile.region,
-            'school':profile.school,
-            'class_name':profile.class_name
+            'region':user.region,
+            'school':user.school,
+            'class_name':user.class_name
         }
 
-        Result.objects.create(region=profile.region, school=profile.school, class_name=profile.class_name, quiz=quiz, user=user, score = math.trunc(percent))
+        Result.objects.create(region=user.region, school=user.school, class_name=user.class_name, quiz=quiz, user=user, score = math.trunc(percent))
         return render(request,'quizes/result.html', context)
     else:
         quiz = Quiz.objects.get(id=pk)
-        questions = sorted(Question.objects.filter(subject_id=quiz)[0:15], key=lambda x: random.random())
+        questions = sorted(Question.objects.filter(subject_id=quiz)[0:180], key=lambda x: random.random())
         # questions = Question.objects.filter(subject_id=pk)[0:15]
         context = {
             'questions': questions,

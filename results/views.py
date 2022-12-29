@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from userprofile.models import Profile
+# from userprofile.models import Profile
 from .models import Result
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from userprofile.models import User
 import pandas as pd
 from django.http import HttpResponse
 from django.views.generic import ListView
@@ -12,8 +13,8 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 def export_result_to_excel(request):
-    results=Result.objects.filter(school = request.user.profile.school)
-    profile = Profile.objects.all()
+    results=Result.objects.filter(school = request.user.school)
+    # profile = Profile.objects.all()
     data = []
     for res in results:
             data.append({
@@ -64,14 +65,14 @@ def export_to_excel_btn(request):
 
 def superadmin(request):
     user=User.objects.all()
-    profile = Profile.objects.all()
+    # profile = Profile.objects.all()
     results=Result.objects.all()
 
     paginator = Paginator(Result.objects.all(), 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    context = { 'user': user, 'results': results, 'profile': profile, 'page_obj':page_obj }
+    context = { 'user': user, 'results': results, 'page_obj':page_obj }
 
     return render(request,'stats/superadmin.html', context)
     
@@ -90,9 +91,7 @@ def individual(request):
     user=User.objects.all()
     results=Result.objects.filter(user = request.user)
     user = request.user
-    profile = Profile.objects.get(user=user)
+    # profile = Profile.objects.get(user=user)
 
-    context = { 'user': user, 'results': results, 'profile': profile, 'region':profile.region,
-            'school':profile.school,
-            'class_name':profile.class_name }
+    context = { 'user': user, 'results': results}
     return render(request, "login/individual.html", context)

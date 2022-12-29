@@ -59,7 +59,7 @@
               </thead>
               <tbody>
               {% for p in results %}
-              {% if p.school == request.user.profile.school  %}
+              {% if p.school == request.user.school  %}
               <tr>
                 <td>{{p.region}}</td>
                   <td>{{p.school}}</td>
