@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from .forms import RequestForm
 from django.http import HttpResponse
-# from django.contrib.auth.models import User
 from userprofile.models import User
-# from userprofile.models import Profile
 from openpyxl import load_workbook
 
 # Create your views here.
@@ -52,12 +50,6 @@ def add_students(request):
                 school=school_region
             )
             user.save()
-
-            # if Profile.objects.filter(user=user).exists():
-            #     continue
-
-            # profile = Profile(user=user, class_name=class_name, region=student_region, school=school_region)
-            # profile.save()
 
         return HttpResponse("Ученики добавлены")
     else:

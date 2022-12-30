@@ -1,6 +1,5 @@
 from django.db import models
 from quizes.models import Quiz
-# from django.contrib.auth.models import User
 from userprofile.models import User
 # Create your models here.
 
@@ -18,4 +17,3 @@ class Result(models.Model):
     
     class Meta:
         verbose_name_plural = 'Результаты'
-

@@ -51,8 +51,11 @@ def mainpage(request):
 def subject(request):
     user_class_name = request.user.class_name
     user_class_name = ''.join(filter(str.isdigit, user_class_name))
-    grade = Grade.objects.filter(grade = user_class_name)
-    # grade = Grade.objects.all()
+
+    if request.user.is_staff:
+        grade = Grade.objects.all()
+    else:
+        grade = Grade.objects.filter(grade = user_class_name)
     context = {'grade':grade}
     return render(request,'quizes/subject.html', context)
 
@@ -76,8 +79,8 @@ def quiz_view(request, id, pk):
         for q in questions:
             total+=1
             answer = request.POST.get(q.question) # Gets user’s choice, i.e the key of answer
-            print("вопрос: " + str(q.answers) + " id: " +str(q.id))
-            print("ответ: " + str(answer))
+            # print("вопрос: " + str(q.answers) + " id: " +str(q.id))
+            # print("ответ: " + str(answer))
 
             if q.answers == answer:
                 score+=10
@@ -105,8 +108,14 @@ def quiz_view(request, id, pk):
         return render(request,'quizes/result.html', context)
     else:
         quiz = Quiz.objects.get(id=pk)
-        questions = sorted(Question.objects.filter(subject_id=quiz)[0:15], key=lambda x: random.random())
-        # questions = Question.objects.filter(subject_id=pk)[0:15]
+
+        if request.user.is_staff:
+            questions_numbers = 180
+        else:
+            questions_numbers = 15
+        
+        questions = sorted(Question.objects.filter(subject_id=quiz)[0:questions_numbers], key=lambda x: random.random())
+
         context = {
             'questions': questions,
             'quiz': quiz
